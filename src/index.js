@@ -4,6 +4,7 @@ import zeldaImg from "./assets/zelda.png";
 import skyImg from "./assets/sky.png";
 import starImg from "./assets/star.png";
 // import style from "./css/style.css"
+// test
 
 const canvasWidth = 800;
 const canvasHeight = 600;
