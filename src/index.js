@@ -6,7 +6,6 @@ import platform from "./assets/platform.png";
 import dude from "./assets/dude.png";
 import bomb from "./assets/bomb.png";
 
-const canvasWidth = 800, canvasHeight = 600;
 let stars, platforms, player, bombs, cursors, score = 0, scoreText, gameOver = false;
 
 const preload = function preload () {
@@ -33,17 +32,20 @@ function create() {
   cursors = this.input.keyboard.createCursorKeys();
   scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '22px', fill: '#000' });
 
+  // platforms
   platforms.create(400, 568, 'ground').setScale(2).refreshBody();
   platforms.create(600, 400, 'ground');
   platforms.create(50, 250, 'ground');
   platforms.create(750, 220, 'ground');
+  // player
   player.setBounce(0.2);
   player.setCollideWorldBounds(true);
   player.body.setGravityY(300);
-
+  // stars
+  const howManyStars = 11;
   stars = this.physics.add.group({
     key: 'star',
-    repeat: 11,
+    repeat: howManyStars,
     setXY: { x: 12, y: 0, stepX: 70 }
   });
   stars.children.iterate(function (child) {
@@ -108,6 +110,9 @@ function create() {
 };
 
 const update = function update() {
+  if (gameOver) {
+    return;
+  }
   if (cursors.left.isDown) {
     player.setVelocityX(-160);
     player.anims.play('left', true);
@@ -125,6 +130,7 @@ const update = function update() {
 
 };
 
+const canvasWidth = 800, canvasHeight = 600;
 const config = {
   type: Phaser.AUTO,
   width: canvasWidth,
@@ -141,5 +147,4 @@ const config = {
     update: update,
   },
 };
-
 const game = new Phaser.Game(config);
