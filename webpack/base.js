@@ -27,6 +27,10 @@ module.exports = {
         test: /\.css$/,
         use: ["style-loader", "css-loader"]
       },
+      {
+        test: /\.(mp3|ogg)$/,
+        loader: "file-loader"
+      },
     ]
   },
   plugins: [
